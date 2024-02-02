@@ -559,8 +559,17 @@ namespace ORB_SLAM3 {
                 output << "Kannala-Brandt";
             }
             output << "" << ": [";
-            for(size_t i = 0; i < settings.originalCalib2_->size(); i++){
-                output << " " << settings.originalCalib2_->getParameter(i);
+            //for(size_t i = 0; i < settings.originalCalib2_->size(); i++){
+            //    output << " " << settings.originalCalib2_->getParameter(i);
+            //}
+            if (settings.cameraType_ == Settings::PinHole) {
+                for(size_t i = 0; i < settings.originalCalib2_->size(); i++){
+                    output << " " << settings.originalCalib2_->getParameter(i);
+                }
+            } else if (settings.cameraType_ == Settings::Rectified) {
+                for (size_t i = 0; i < settings.originalCalib1_->size(); i++) {
+                    output << " " << settings.originalCalib1_->getParameter(i);
+                }
             }
             output << " ]" << endl;
 
